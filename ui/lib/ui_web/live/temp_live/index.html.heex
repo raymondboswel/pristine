@@ -1,0 +1,36 @@
+<h1>Listing Temps</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <% live_modal UiWeb.TempLive.FormComponent, 
+      id: @temp.id || :new,
+      title: @page_title,
+      action: @live_action,
+      temp: @temp,
+      return_to: Routes.temp_index_path(@socket, :index)
+    %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="temps">
+    <%= for temp <- @temps do %>
+      <tr id={"temp-#{temp.id}"}>
+        <td><%= temp.value %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.temp_show_path(@socket, :show, temp) %></span>
+          <span><%= live_patch "Edit", to: Routes.temp_index_path(@socket, :edit, temp) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: temp.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Temp", to: Routes.temp_index_path(@socket, :new) %></span>

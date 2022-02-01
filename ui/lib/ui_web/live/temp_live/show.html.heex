@@ -1,0 +1,25 @@
+<h1>Show Temp</h1>
+
+<%= if @live_action in [:edit] do %>
+  <% live_modal UiWeb.TempLive.FormComponent,
+      
+    return_to: Routes.temp_show_path(@socket, :show, @temp),
+      id: @temp.id,
+      title: @page_title,
+      action: @live_action,
+      temp: @temp
+    
+  %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @temp.value %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.temp_show_path(@socket, :edit, @temp), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.temp_index_path(@socket, :index) %></span>
