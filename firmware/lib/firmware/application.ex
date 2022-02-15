@@ -18,6 +18,7 @@ defmodule Firmware.Application do
         # Starts a worker by calling: Firmware.Worker.start_link(arg)
         # {Firmware.Worker, arg},
         Firmware.Scheduler,
+        {Sgp30, Sgp30},
         {Firmware.TemperatureGenserver, Firmware.TemperatureGenserver}
       ] ++ children(target())
 

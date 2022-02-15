@@ -29,9 +29,15 @@ defmodule Firmware.TemperatureGenserver do
 
   @impl true
   def handle_cast({:push, element}, state) do
-    # TODO: if list size greater that e.g 3600, dump to file and add element to new empty list
+    if length(state) > 6 do
+      total = Enum.reduce(state, 0, fn el, acc -> acc + el.value end)
+      avg = total / length(state)
 
-    {:noreply, [element | state]}
+      Ui.Data.create_temp(%{value: avg})
+
+      {:noreply, [element]}
+    else
+      {:noreply, [element | state]}
+    end
   end
-
 end
