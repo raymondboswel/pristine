@@ -46,14 +46,14 @@ defmodule Firmware.Scheduler do
     tempPid = Process.whereis(Firmware.TemperatureGenserver)
     TemperatureGenserver.push(tempPid, temp)
 
-    sgp30 = Sgp30.state()
+    # sgp30 = Sgp30.state()
 
-    Ui.Data.create_voc(%{
-      eco2: sgp30,
-      ethanol_raw: sgp30.ethanol_raw,
-      h2_raw: sgp30.h2_raw,
-      tvoc: sgp30.tvoc
-    })
+    # Ui.Data.create_voc(%{
+    #   eco2: sgp30,
+    #   ethanol_raw: sgp30.ethanol_raw,
+    #   h2_raw: sgp30.h2_raw,
+    #   tvoc: sgp30.tvoc
+    # })
 
     schedule_work()
     {:noreply, state}

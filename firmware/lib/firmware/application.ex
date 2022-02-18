@@ -13,13 +13,14 @@ defmodule Firmware.Application do
 
     children =
       [
-        {Task, &Firmware.MigrationHelpers.migrate/0},
+        {Task, &Firmware.MigrationHelpers.migrate/0}
         # Children for all targets
         # Starts a worker by calling: Firmware.Worker.start_link(arg)
         # {Firmware.Worker, arg},
-        Firmware.Scheduler,
-        {Sgp30, Sgp30},
-        {Firmware.TemperatureGenserver, Firmware.TemperatureGenserver}
+        # Firmware.Scheduler,
+        # {Sgp30, Sgp30},
+        # {Firmware.TemperatureGenserver, Firmware.TemperatureGenserver},
+        # {Firmware.DustGenserver, Firmware.DustGenserver}
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)
