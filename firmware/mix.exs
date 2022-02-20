@@ -12,6 +12,7 @@ defmodule Firmware.MixProject do
       elixir: "~> 1.9",
       archives: [nerves_bootstrap: "~> 1.10"],
       start_permanent: Mix.env() == :prod,
+      compilers: [:elixir_make] ++ Mix.compilers(),
       build_embedded: true,
       deps: deps(),
       releases: [{@app, release()}],
@@ -40,7 +41,7 @@ defmodule Firmware.MixProject do
       {:nerves_runtime, "~> 0.11.3", targets: @all_targets},
       {:nerves_pack, "~> 0.6.0", targets: @all_targets},
 
-      # Poncho dependencies 
+      # Poncho dependencies
       # See https://embedded-elixir.com/post/2017-05-19-poncho-projects
       {:ui, path: "../ui", targets: @all_targets, env: Mix.env()},
 
@@ -60,7 +61,10 @@ defmodule Firmware.MixProject do
       {:nerves_system_x86_64, "~> 1.17", runtime: false, targets: :x86_64},
       {:timex, "~> 3.7.6"},
       {:grovepi, "~> 0.5.1"},
-      {:sgp30, "~> 0.1"}
+      {:sgp30, "~> 0.1"},
+      {:elixir_make, "~> 0.4", runtime: false},
+      {:avr, "~> 0.1.0"},
+
     ]
   end
 
