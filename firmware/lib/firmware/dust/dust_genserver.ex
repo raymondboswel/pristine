@@ -12,6 +12,10 @@ defmodule Firmware.DustGenserver do
     GenServer.call(pid, :dust_value)
   end
 
+  def measurements_length(pid) do
+    GenServer.call(pid, :measurements_length)
+  end
+
   # Server (callbacks)
 
   @impl true
@@ -26,6 +30,11 @@ defmodule Firmware.DustGenserver do
   @impl true
   def handle_call(:dust_value, _from, state) do
     {:reply, state.dust_value, state}
+  end
+
+  @impl true
+  def handle_call(:measurements_length, _from, state) do
+    {:reply, length(state.measurements), state}
   end
 
   defp schedule_work() do
@@ -44,7 +53,7 @@ defmodule Firmware.DustGenserver do
     # Reschedule once more
 
     now = DateTime.utc_now()
-    sensor_level = Firmware.GroveDust.measure()
+    sensor_level = Firmware.GroveDust.measure_level()
     Logger.debug(sensor_level)
 
     if(DateTime.diff(now, state.start_date) >= 30) do
