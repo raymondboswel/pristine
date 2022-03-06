@@ -1,0 +1,30 @@
+<h1>Listing Dust values</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="dust_values">
+    <%= for dust_value <- @dust_values do %>
+      <tr id={"dust_value-#{dust_value.id}"}>
+        <td><%= dust_value.value %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.dust_value_show_path(@socket, :show, dust_value) %></span>
+          <span><%= live_patch "Edit", to: Routes.dust_value_index_path(@socket, :edit, dust_value) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: dust_value.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Dust value", to: Routes.dust_value_index_path(@socket, :new) %></span>

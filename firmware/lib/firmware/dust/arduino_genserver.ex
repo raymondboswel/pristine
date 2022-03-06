@@ -39,6 +39,7 @@ defmodule Firmware.Dust.Arduino do
 
   def handle_info({:circuits_uart, _, msg}, state) do
     Logger.info("Message from arduino: #{inspect msg}")
+    Ui.Data.create_dust_value(%{value: msg})
     {:noreply, state}
   end
 

@@ -1,0 +1,17 @@
+<h1>Show Dust value</h1>
+
+<%= if @live_action in [:edit] do %>
+
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @dust_value.value %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.dust_value_show_path(@socket, :edit, @dust_value), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.dust_value_index_path(@socket, :index) %></span>

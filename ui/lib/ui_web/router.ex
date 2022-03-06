@@ -32,6 +32,13 @@ defmodule UiWeb.Router do
 
     live "/temps/:id", TempLive.Show, :show
     live "/temps/:id/show/edit", TempLive.Show, :edit
+
+    live "/dust_values", DustValueLive.Index, :index
+    live "/dust_values/new", DustValueLive.Index, :new
+    live "/dust_values/:id/edit", DustValueLive.Index, :edit
+
+    live "/dust_values/:id", DustValueLive.Show, :show
+    live "/dust_values/:id/show/edit", DustValueLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

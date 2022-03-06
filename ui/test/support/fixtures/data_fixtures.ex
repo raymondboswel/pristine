@@ -17,4 +17,18 @@ defmodule Ui.DataFixtures do
 
     temp
   end
+
+  @doc """
+  Generate a dust_value.
+  """
+  def dust_value_fixture(attrs \\ %{}) do
+    {:ok, dust_value} =
+      attrs
+      |> Enum.into(%{
+        value: 120.5
+      })
+      |> Ui.Data.create_dust_value()
+
+    dust_value
+  end
 end
